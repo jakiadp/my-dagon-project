@@ -4,6 +4,10 @@ import Home from "../Page/Home";
 import LeftAside from "../Component/HomeLayout/LeftAside";
 import RifgtAside from "../Component/HomeLayout/RifgtAside";
 import CaregoryNews from "../Page/CaregoryNews";
+import Login from "../Page/Login";
+import Register from "../Page/Register";
+import AuthLayout from "../Layout/AuthLayout";
+import NewsDetails from "../Page/NewsDetails";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,17 +27,25 @@ const router = createBrowserRouter([
   },
 
 
-    {
-    path: "/",
-    element: <h2>Authentication layout</h2>,
-  },
   {
     path: "/auth",
-    element: <h2>Authentication layout1</h2>,
+    element:<AuthLayout></AuthLayout> ,
+
+
+    children:[
+      {
+        path:"/auth/login",
+        element:<Login></Login>
+      },
+       {
+        path:"/auth/register",
+        element:<Register></Register>
+      },
+    ],
   },
   {
-    path: "/news",
-    element: <h2>Authentication layout</h2>,
+    path: "/news-details/id",
+    element: <NewsDetails></NewsDetails> ,
   },
   {
     path: "/*",

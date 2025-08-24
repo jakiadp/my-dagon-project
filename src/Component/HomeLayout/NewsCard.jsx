@@ -2,6 +2,7 @@ import React from 'react';
 import { FaEye, FaStar } from 'react-icons/fa';
 import { IoMdShare } from 'react-icons/io';
 import { IoBookmarkOutline } from 'react-icons/io5';
+import { Link } from 'react-router';
 
 const NewsCard = ({news}) => {
      const {
@@ -36,7 +37,7 @@ const NewsCard = ({news}) => {
       </div>
 
       {/* Content */}
-      <div className="px-4 pt-4">
+      <div className="px-4 pt-4 text-accent">
         <h2 className="card-title text-lg mb-3">{title}</h2>
         <img
           src={thumbnail_url}
@@ -45,6 +46,7 @@ const NewsCard = ({news}) => {
         />
         <p className="mt-3 text-sm text-gray-700">
           {details.slice(0, 200)}...
+          <Link to="/news-details/id" className='text-primary font-semibold cursor-pointer hover:underline'>Read More</Link>
         </p>
       </div>
 
