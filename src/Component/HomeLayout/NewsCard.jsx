@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 
 const NewsCard = ({news}) => {
      const {
+    id,
     title,
     rating,
     total_view,
@@ -46,7 +47,7 @@ const NewsCard = ({news}) => {
         />
         <p className="mt-3 text-sm text-gray-700">
           {details.slice(0, 200)}...
-          <Link to="/news-details/id" className='text-primary font-semibold cursor-pointer hover:underline'>Read More</Link>
+          <Link to={`/news-details/${id}`} className='text-primary font-semibold cursor-pointer hover:underline'>Read More</Link>
         </p>
       </div>
 

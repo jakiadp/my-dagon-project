@@ -1,30 +1,49 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { Link } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 
 const Register = () => {
 
-   const{createUser, setUser} = use(AuthContext);
+   const{createUser, setUser, updateUser} = use(AuthContext);
+   const [nameError,setnameError] = useState("");
 
   const handleRegister =(e)=>{
    
   e.preventDefault();
-  console.log(e.target);
+  // console.log(e.target);
   const form  = e.target;
   const name = form.name.value;
+
+  if(name.length < 5 ) {
+    setnameError("Name shoud be more then 5 character");
+    return;
+} 
+    else{
+      setnameError("")
+    }
   const photo = form.photo.value;
   const email = form.email.value;
   const password = form.password.value;
-  console.log({name,email,photo,password});
+  // console.log({name,email,photo,password});
 
   createUser(email,password)
   .then((result) =>{
     const user =result.user;
     // console.log(user);
-    setUser(user);
+   updateUser({displayName: name,photoURL:photo})
+   .then(()=>{
+
+
+       setUser({...user, displayName: name,photoURL:photo });
+   })
+   .catch((error)=>{
+    //            
+     setUser(user);
+   })
+    
   })
   .catch((error) => {
-    const errorCode =error.code;
+
     const errorMessage = error.errorMessage;
     alert(errorMessage);
     
@@ -49,6 +68,9 @@ const Register = () => {
           className="input"
            placeholder="Name"
            required/>
+           {
+            nameError && <p className='text-xs text-error '>{nameError}</p>
+           }
           {/* photo */}
             <label className="label">Photo url</label>
           <input name='photo' 
